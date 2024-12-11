@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+% Pacchetti utili
+\usepackage[utf8]{inputenc}  
+\usepackage{amsmath}         
+\usepackage{amssymb}         
+\usepackage{graphicx}        
+\usepackage{geometry}        
+\usepackage{fancyhdr}        
+\usepackage{hyperref}       
+\usepackage{float} 
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{cancel}
+
+% Impostazioni per i margini
+\geometry{a4paper, margin=0.8in}
+% Spaziatura tra righe
+%\linespread{0.9}
+
+% Grandezza righe tabelle
+%\renewcommand{\arraystretch}{1} % Aumenta l'altezza delle righe
+
+% Intestazioni
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Linguaggi Formali e Compilatori}
+\fancyhead[R]{Soluzione Esercizi Tipo - Parte III}
+\fancyfoot[C]{\thepage}   
+\setlength{\headheight}{14pt}
+
+
+\begin{document}
+\section{Esercizio 1}
+\subsection*{Soluzione}
+Gli items di $J[Aa]$ sono: 
+$$S \rightarrow Aa\cdot B$$
+$$B \rightarrow \cdot$$
+Per lo svolgimento guardare la soluzione al primo esercizio degli "Esercizi Tipo - Parte II".
+Riporto l'automa.
+
+\hypertarget{automa_1}{}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.6\textwidth]{../2/img/01AutomaSRL.png}
+  \label{fig:01-automa}
+\end{figure}
+
+\section{Esercizio 2}
+\subsection{Soluzione}
+Seguendo le transazioni dallo stato iniziale dell'automa \hyperlink{automa_1}{$\cal A$} 
+si arriva allo stato 6 dell'automa, che non presenta alcun conflitto.
+Rimando sempre al primo esercizio delgli "Esercizi Tipo - Parte II" per lo svolgimento.
+Riporto la tabella SRL(1).
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+  \hline
+  \textbf{Stato} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{\$} & \textbf{A} & \textbf{B} & \textbf{S} \\
+  \hline
+  0 & \colorbox{yellow}{R4 / R5} & S3 & R5 & R5 & 2 & 4 & 1 \\
+  \hline
+  1 &  &  &  & acc &  &  & \\
+  \hline
+  2 & S5 &  &  &  &  &  & \\
+  \hline
+  3 &  &  &  & R4 &  &  &  \\
+  \hline
+  4 &  &  & S6 &  &  &  & \\
+  \hline
+  5 & R5 &  & R5 & R5 &  & 7 & \\
+  \hline
+  6 & R5 &  & R5 & R5 &  & 8 & \\
+  \hline
+  7 &  &  &  & R1 &  &  & \\
+  \hline
+  8 & S9 &  &  &  &  &  & \\
+  \hline
+  9 & \colorbox{yellow}{R4 / R5} &  & R5 & R5 & 10 & 4 & \\
+  \hline
+  10 & R3 &  &  &  &  &  & \\
+  \hline
+  \end{tabularx}
+  \label{tab:02-parsing}
+\end{table}
+\newpage
+
+\section{Esercizio 3}
+\subsection{Automa caratteristico}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.6\textwidth]{./img/03AutomaSRL.png}
+    \label{fig:03-automa}
+  \end{figure}
+\subsection{First \& Follow}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|}
+  \hline
+  \textbf{Non Terminale} & \textbf{First} & \textbf{Follow} \\
+  \hline
+  $S$ & $\{n\}$ & $\{\$\}$ \\
+  \hline
+  $E$ & $\{n\}$ & $\{a, b, \$\}$ \\
+  \hline
+  \end{tabular}
+  \label{tab:03-first-follow}
+\end{table}
+\subsection{Tabella di parsing}
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+  \hline
+  \textbf{Stato} & \textbf{a} & \textbf{b} & \textbf{n} & \textbf{\$} & \textbf{E} & \textbf{S} \\
+  \hline
+  0 & & & S3 & & 2 & 1 \\
+  \hline
+  1 & & & & acc & & \\
+  \hline
+  2 & S4 & S5 & & R1 & & \\
+  \hline
+  3 & R2 & R2 & & R2 & & \\
+  \hline
+  4 & & & S3 & & 6 & \\
+  \hline
+  5 & & & S3 & & 7 & \\
+  \hline
+  6 & R3/\sout{S4} & R3/\sout{S5} & & R3 & & \\
+  \hline
+  7 & R4/\sout{S4} & R4/\sout{S5} & & R4 & & \\
+  \hline
+  
+  \end{tabularx}
+  \label{tab:03-parsing-table}
+\end{table}
+\subsection{Parsing}
+Effettuiamo il parsing della parola $nbnan$:
+\begin{table}[H]
+  \begin{tabular}{lllll}
+    \textbf{Parola} & \textbf{State Stack} & \textbf{Symbol Stack} & \textbf{Azioni} & \textbf{Regole Semantiche}\\
+    \hline
+    $nbnan$ & 0 &  \\
+    $\underline n bnan$ & $03$ & $n$ & S3 & \\
+    $\underline n bnan$ & $0\mathrel{\cancel 3}2$ & $\mathrel{\cancel  n} E$ & R2 G2 & $E.v = n.{lexval} = 4$\\
+    $\underline {nb} nan$ & $025$ & $Eb$ & S5 & \\
+    $\underline {nbn} an$ & $0253$ & $Ebn$ & S3 & \\
+    $\underline {nbn} an$ & $025\mathrel{\cancel 3}7$ & $Eb\mathrel{\cancel  n}E$ & R2 G7 & $E.v = n.{lexval} = 3$\\
+    $\underline {nbn} an$ & $0\mathrel{\cancel{257}}2$ & $\mathrel{\cancel{EbE}}E$ & R4 G2 & $E.v = E.v + E.v = 4 + 3 = 7$ \\
+  \end{tabular}
+\label{tab:03-parsing-a}
+\end{table}
+\begin{table}[H]
+  \begin{tabular}{lllll}
+    \textbf{Parola} & \textbf{State Stack} & \textbf{Symbol Stack} & \textbf{Azioni} & \textbf{Regole Semantiche}\\
+    \hline
+    $\underline {nbna} n$ & $024$ & $Ea$ & S4 & \\
+    $\underline {nbnan} $ & $0243$ & $Ean$ & S3 & \\
+    $\underline {nbnan} $ & $024\mathrel{\cancel 3} 6$ & $Ea\mathrel{\cancel  n} E$ & R2 G6 & $E.v = n.{lexval} = 3$ \\
+    $\underline {nbnan} $ & $0\mathrel{\cancel{246}} 2$ & $\mathrel{\cancel{EaE}}E$ & R3 G6 & $E.v = E.v + E.v = 7 \cdot 3 = 21$ \\
+    $\underline {nbnan} $ & $0\mathrel{\cancel 2}1$ & $\mathrel{\cancel E}S$ & R1 G1 & $S.v = E.v = 21$ \\
+    $\underline {nbnan} $ & $01$ & $S$ & acc &  \\
+  \end{tabular}
+\label{tab:03-parsing-b}
+\end{table}
+\subsection{Risultato}
+La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
+\end{document}
+

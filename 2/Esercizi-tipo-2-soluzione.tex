@@ -26,6 +26,7 @@
 \fancyhead[L]{Linguaggi Formali e Compilatori}
 \fancyhead[R]{Soluzione Esercizi Tipo - Parte II}
 \fancyfoot[C]{\thepage}   
+\setlength{\headheight}{14pt}
 
 
 \begin{document}
@@ -67,7 +68,7 @@ transizioni da quelli appena calcolati otteniamo l'automa seguente:
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{img/01AutomaSRL.png}
-  \label{fig:automa}
+  \label{fig:01-automa}
 \end{figure}
 
 \subsection{Creazione della tabella di parsing SLR(1)}
@@ -86,7 +87,7 @@ $A$ & $\{c, \epsilon\}$ & $\{a\}$ \\
 $B$ & $\{\epsilon\}$ & $\{c, a, \$\}$ \\
 \hline
 \end{tabular}
-\label{tab:first-follow}
+\label{tab:01-first-follow}
 \end{table}
 
 \noindent Costruiamo ora la tabella di parsing. Le transizioni dei terminali sono \textit{shift}, quelle 
@@ -130,7 +131,7 @@ dei non terminali sono \textit{GOTO}, mentre le riduzioni avvengono nei \textit{
   10 & R3 &  &  &  &  &  & \\
   \hline
   \end{tabularx}
-  \label{tab:parsing}
+  \label{tab:01-parsing-table}
 \end{table}
 
 \subsection{Risposte alle domande}
@@ -156,7 +157,7 @@ Lo svolgimento è analogo all'esercizio precedente:
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{img/02AutomaSRL.png}
-  \label{fig:automa}
+  \label{fig:02-automa}
 \end{figure}
 
 \subsection{Creazione della tabella di parsing SLR(1)}
@@ -175,7 +176,7 @@ $L$ & $\{*, id\}$ & $\{=, \$\}$ \\
 $R$ & $\{*, id\}$ & $\{=, \$\}$ \\
 \hline
 \end{tabular}
-\label{tab:first-follow}
+\label{tab:02-first-follow}
 \end{table}
 \noindent Reducing items:
 \begin{itemize}
@@ -214,7 +215,7 @@ $R$ & $\{*, id\}$ & $\{=, \$\}$ \\
   9 &  &  &  & R1 &  &  & \\
   \hline
   \end{tabularx}
-  \label{tab:parsing}
+  \label{tab:02-parsing-table}
 \end{table}
 
 \subsection{Risposte alle domande}
@@ -258,7 +259,7 @@ In questo modo, l'operatore $a$ verrà letto e processato prima che venga effett
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{img/03AutomaSRL.jpg}
-  \label{fig:automa}
+  \label{fig:03-automa}
 \end{figure}
 \subsection {Tabella di parsing}
 
@@ -283,7 +284,7 @@ In questo modo, l'operatore $a$ verrà letto e processato prima che venga effett
   6 & \colorbox{yellow}{S3 / R3} & \colorbox{yellow}{S4 / R3} & & R3 &  \\
   \hline
   \end{tabularx}
-  \label{tab:parsing}
+  \label{tab:03-parsing-table}
 \end{table}
 \newpage
 
