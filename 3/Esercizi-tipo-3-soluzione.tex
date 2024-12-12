@@ -87,26 +87,33 @@ Riporto la tabella SRL(1).
 \newpage
 
 \section{Esercizio 3}
-\subsection{Automa caratteristico}
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=0.6\textwidth]{./img/03AutomaSRL.png}
-    \label{fig:03-automa}
-  \end{figure}
-\subsection{First \& Follow}
-\begin{table}[H]
-  \centering
-  \begin{tabular}{|c|c|c|}
-  \hline
-  \textbf{Non Terminale} & \textbf{First} & \textbf{Follow} \\
-  \hline
-  $S$ & $\{n\}$ & $\{\$\}$ \\
-  \hline
-  $E$ & $\{n\}$ & $\{a, b, \$\}$ \\
-  \hline
-  \end{tabular}
-  \label{tab:03-first-follow}
-\end{table}
+\begin{center}
+  \begin{minipage}[t]{0.7\linewidth} 
+    \subsection{Automa caratteristico}
+    \begin{figure}[H]
+      \centering
+        \includegraphics[width=0.8\textwidth]{./img/03AutomaSRL.png}
+        \label{fig:03-automa}
+    \end{figure}    
+  \end{minipage}
+  \hspace{0.2cm} 
+  \begin{minipage}[t]{0.25\linewidth} 
+    \subsection{First \& Follow}
+    \begin{table}[H]
+      \begin{tabular}{|c|c|c|}
+      \hline
+       & \textbf{First} & \textbf{Follow} \\
+      \hline
+      $S$ & $\{n\}$ & $\{\$\}$ \\
+      \hline
+      $E$ & $\{n\}$ & $\{a, b, \$\}$ \\
+      \hline
+      \end{tabular}
+      \label{tab:03-first-follow}
+    \end{table}
+  \end{minipage}
+\end{center}
+
 \subsection{Tabella di parsing}
 \begin{table}[H]
   \centering
@@ -147,13 +154,6 @@ Effettuiamo il parsing della parola $nbnan$:
     $\underline {nbn} an$ & $0253$ & $Ebn$ & S3 & \\
     $\underline {nbn} an$ & $025\mathrel{\cancel 3}7$ & $Eb\mathrel{\cancel  n}E$ & R2 G7 & $E.v = n.{lexval} = 3$\\
     $\underline {nbn} an$ & $0\mathrel{\cancel{257}}2$ & $\mathrel{\cancel{EbE}}E$ & R4 G2 & $E.v = E.v + E.v = 4 + 3 = 7$ \\
-  \end{tabular}
-\label{tab:03-parsing-a}
-\end{table}
-\begin{table}[H]
-  \begin{tabular}{lllll}
-    \textbf{Parola} & \textbf{State Stack} & \textbf{Symbol Stack} & \textbf{Azioni} & \textbf{Regole Semantiche}\\
-    \hline
     $\underline {nbna} n$ & $024$ & $Ea$ & S4 & \\
     $\underline {nbnan} $ & $0243$ & $Ean$ & S3 & \\
     $\underline {nbnan} $ & $024\mathrel{\cancel 3} 6$ & $Ea\mathrel{\cancel  n} E$ & R2 G6 & $E.v = n.{lexval} = 3$ \\
@@ -161,9 +161,44 @@ Effettuiamo il parsing della parola $nbnan$:
     $\underline {nbnan} $ & $0\mathrel{\cancel 2}1$ & $\mathrel{\cancel E}S$ & R1 G1 & $S.v = E.v = 21$ \\
     $\underline {nbnan} $ & $01$ & $S$ & acc &  \\
   \end{tabular}
-\label{tab:03-parsing-b}
+\label{tab:03-parsing-a}
 \end{table}
 \subsection{Risultato}
 La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
+
+\newpage
+\section{Esercizio 4}
+\subsection{Funzioni ed attributi}
+\begin{itemize}
+  \item \textit{node}: attributo sintetizzato che contiene informazioni sul tipo 
+  (`+`, `*` o `id`), eventuali riferimenti alla tabella dei simboli e i 
+  riferimenti ai figli del nodo, se presenti
+  \item $newLeaf(\,label,\; value\,)$: funzione ausiliaria che va a creare 
+  un nodo foglia, quindi per questa grammatica con label 'id' e value un 
+  riferimento alla tabella dei simboli
+  \item $newNode(\, label,\; child_1,\; child_2\,)$: funzione ausiliaria che 
+  va a creare un nuovo nodo con label l'operatore (+ o *) e il riferimento
+  ai nodi figli
+\end{itemize}
+
+\subsection{SDD}
+\begin{center}
+  \raggedright
+  \begin{minipage}[t]{0.29\linewidth}
+    $E \rightarrow E_1 + E_2$ \\
+    $E \rightarrow E_1 * E_2$ \\
+    $E \rightarrow (E_1)$     \\
+    $E \rightarrow id$     
+  \end{minipage}
+  \hspace{0.2cm}
+  \begin{minipage}[t]{0.5\linewidth}
+    \raggedright
+    $\{E.node = newNode(\,'+',\; E_1.node,\; E_2.node\,);\}$ \\
+    $\{E.node = newNode(\,'*',\; E_1.node,\; E_2.node\,);\}$ \\
+    $\{E.node = E_1.node;\}$ \\
+    $\{E.node = newLeaf(\,id,\; id.entry\,);\}$ \\
+  \end{minipage}
+  \hspace{0.2cm}
+\end{center}
 \end{document}
 
