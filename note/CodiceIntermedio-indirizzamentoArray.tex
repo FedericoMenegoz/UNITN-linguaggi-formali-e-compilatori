@@ -133,25 +133,25 @@ ed aggiornare l'offset per il corretto indirizzamento dell'elemento:
 \begin{center}
   \begin{tabularx}{\linewidth}{l m{0.6\linewidth}}
   $\{L.array = L_1.array$
-      & \small Recupera l'array da una voce della tabella simboli, $L_1$, in base all'identificatore \\[0.3cm]
+      & \small L'array a cui si fa riferimento rimane lo stesso. \\[0.3cm]
   
   $L.type = arg2(L_1.type)$
-      & \small Estrae il tipo del sottoarray da $L_1$, passando attraverso il secondo argomento della funzione $arg2$ \\[0.3cm]
+      & \small Estrae il tipo del sottoarray a questo livello. Se L1.type era array(3, integer), L.type diventa integer. \\[0.3cm]
   
   $ L.width = width(L.type) $
-      & \small Determina la larghezza in byte del tipo estratto da $L.type$, che rappresenta il sottoarray \\[0.3cm]
+      & \small Calcola la dimensione del sottoarray corrente (ad esempio, la dimensione di un integer).\\[0.3cm]
   
   $ t = \text{newTemp()} $
       & \small Crea un nuovo temporaneo per l'elaborazione intermedia \\[0.3cm]
   
   $ \text{gen}(t \;'\mathord{=}'\; E.addr \;'*'\; L.width)$
-      & \small Genera una nuova istruzione, assegnando l'indirizzo di $E$ moltiplicato per la larghezza del sottoarray, a $t$ \\[0.3cm]
+      & \small Calcola l'offset per la dimensione corrente (utilizzando E.addr per l'indice e L.width) e lo memorizza in una variabile temporanea t. \\[0.3cm]
   
   $ L.addr = \text{newTemp()} $
       & \small Crea un altro temporaneo per l'indirizzo risultante \\[0.3cm]
   
   $ \text{gen}(L.addr \;'\mathord{=}'\; L_1.addr \;'+'\; t )\}$
-      & \small Calcola l'indirizzo finale $L.addr$ come la somma tra l'indirizzo di $L_1$ e $t$. Genera un'ulteriore istruzione per il calcolo dell'offset \\
+      & \small Combina l'offset del livello precedente (L1.addr) con l'offset appena calcolato (t) per ottenere l'offset totale per questo elemento. Questo offset totale viene quindi memorizzato in L.addr. \\
   \end{tabularx}  
 \end{center}
 \end{document}
