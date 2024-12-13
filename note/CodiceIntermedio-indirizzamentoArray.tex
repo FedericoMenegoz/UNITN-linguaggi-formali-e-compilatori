@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 
-% Pacchetti utili
 \usepackage[utf8]{inputenc}  
 \usepackage{amsmath}         
 \usepackage{amssymb}         
@@ -17,11 +16,6 @@
 
 % Impostazioni per i margini
 \geometry{a4paper, margin=0.8in}
-% Spaziatura tra righe
-%\linespread{0.9}
-
-% Grandezza righe tabelle
-%\renewcommand{\arraystretch}{1} % Aumenta l'altezza delle righe
 
 % Intestazioni
 \pagestyle{fancy}
@@ -30,7 +24,6 @@
 \fancyhead[R]{Codice Intermedio - Array SDT}
 \fancyfoot[C]{\thepage}   
 \setlength{\headheight}{14pt}
-
 
 \begin{document}
 \section{Considerazioni}
@@ -118,27 +111,21 @@ da \textbf{id} in \textbf{L}.
 \begin{center}
 \begin{tabularx}{\linewidth}{l m{0.6\linewidth}}
 $\{L.array = table.get(id);$ 
-    & \small Recupera la voce della tabella dei simboli dell'array utilizzando l'identificatore id (ad es., "a"). \\[0.3cm]
+    & \small Recupera la voce della tabella dei simboli dell'array utilizzando l'identificatore id (ad es., "a") \\[0.3cm]
 
 $L.type = arg2(table.getType(id));$ 
-    & \small Estrae il tipo del sottoarray. Ad esempio, se $a$ è $array(2, array(3, integer))$, $L.type$ diventa $array(3, integer)$. \\[0.3cm]
+    & \small Estrae il tipo del sottoarray. Ad esempio, se $a$ è $array(2, array(3, integer))$, $L.type$ diventa $array(3, integer)$ \\[0.3cm]
 
 $L.width = width(L.type)$ 
-    & \small Determina la dimensione (in byte) del sottoarray rappresentato da $L.type$. \\[0.3cm]
+    & \small Determina la dimensione (in byte) del sottoarray rappresentato da $L.type$ \\[0.3cm]
 
 $L.addr = \text{newTemp()}$ 
-    & \small Crea un nuovo temporaneo. \\[0.3cm]
+    & \small Crea un nuovo temporaneo \\ [0.3cm]
 
 $\text{gen}(L.addr \;'\mathord{=}'\;E.addr \;'*'\; L.width\; )\}$ 
-    & \small Calcola il primo offset, cioè in $a[i_1][i_2][...] \rightarrow i_1 \cdot w_1$. \\
+    & \small Calcola il primo offset, cioè in $a[i_1][i_2][...] \rightarrow i_1 \cdot w_1$ \\
 \end{tabularx}
 \end{center}
-
-
-
-  
-
-
 
 \noindent Infine la produzione $\mathbf{L \rightarrow L_1[E] }$ dovrà trasferire i dati processati da id,
 ed aggiornare l'offset per il corretto indirizzamento dell'elemento:
@@ -146,27 +133,25 @@ ed aggiornare l'offset per il corretto indirizzamento dell'elemento:
 \begin{center}
   \begin{tabularx}{\linewidth}{l m{0.6\linewidth}}
   $\{L.array = L_1.array$
-      & \small Recupera l'array da una voce della tabella simboli, $L_1$, in base all'identificatore. \\[0.3cm]
+      & \small Recupera l'array da una voce della tabella simboli, $L_1$, in base all'identificatore \\[0.3cm]
   
   $L.type = arg2(L_1.type)$
-      & \small Estrae il tipo del sottoarray da $L_1$, passando attraverso il secondo argomento della funzione $arg2$. \\[0.3cm]
+      & \small Estrae il tipo del sottoarray da $L_1$, passando attraverso il secondo argomento della funzione $arg2$ \\[0.3cm]
   
   $ L.width = width(L.type) $
-      & \small Determina la larghezza in byte del tipo estratto da $L.type$, che rappresenta il sottoarray. \\[0.3cm]
+      & \small Determina la larghezza in byte del tipo estratto da $L.type$, che rappresenta il sottoarray \\[0.3cm]
   
   $ t = \text{newTemp()} $
-      & \small Crea un nuovo temporaneo per l'elaborazione intermedia. \\[0.3cm]
+      & \small Crea un nuovo temporaneo per l'elaborazione intermedia \\[0.3cm]
   
   $ \text{gen}(t \;'\mathord{=}'\; E.addr \;'*'\; L.width)$
-      & \small Genera una nuova istruzione, assegnando l'indirizzo di $E$ moltiplicato per la larghezza del sottoarray, a $t$. \\[0.3cm]
+      & \small Genera una nuova istruzione, assegnando l'indirizzo di $E$ moltiplicato per la larghezza del sottoarray, a $t$ \\[0.3cm]
   
   $ L.addr = \text{newTemp()} $
-      & \small Crea un altro temporaneo per l'indirizzo risultante. \\[0.3cm]
+      & \small Crea un altro temporaneo per l'indirizzo risultante \\[0.3cm]
   
   $ \text{gen}(L.addr \;'\mathord{=}'\; L_1.addr \;'+'\; t )\}$
-      & \small Calcola l'indirizzo finale $L.addr$ come la somma tra l'indirizzo di $L_1$ e $t$. Genera un'ulteriore istruzione per il calcolo dell'offset. \\
+      & \small Calcola l'indirizzo finale $L.addr$ come la somma tra l'indirizzo di $L_1$ e $t$. Genera un'ulteriore istruzione per il calcolo dell'offset \\
   \end{tabularx}  
 \end{center}
-
 \end{document}
-

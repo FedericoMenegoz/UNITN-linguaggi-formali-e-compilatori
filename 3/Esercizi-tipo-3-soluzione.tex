@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 
-% Pacchetti utili
 \usepackage[utf8]{inputenc}  
 \usepackage{amsmath}         
 \usepackage{amssymb}         
@@ -16,11 +15,6 @@
 
 % Impostazioni per i margini
 \geometry{a4paper, margin=0.8in}
-% Spaziatura tra righe
-%\linespread{0.9}
-
-% Grandezza righe tabelle
-%\renewcommand{\arraystretch}{1} % Aumenta l'altezza delle righe
 
 % Intestazioni
 \pagestyle{fancy}
@@ -46,7 +40,6 @@ Riporto l'automa.
   \includegraphics[width=0.6\textwidth]{../2/img/01AutomaSRL.png}
   \label{fig:01-automa}
 \end{figure}
-
 \section{Esercizio 2}
 \subsection{Soluzione}
 Seguendo le transazioni dallo stato iniziale dell'automa \hyperlink{automa_1}{$\cal A$} 
@@ -85,7 +78,6 @@ Riporto la tabella SRL(1).
   \label{tab:02-parsing}
 \end{table}
 \newpage
-
 \section{Esercizio 3}
 \begin{center}
   \begin{minipage}[t]{0.7\linewidth} 
@@ -113,7 +105,6 @@ Riporto la tabella SRL(1).
     \end{table}
   \end{minipage}
 \end{center}
-
 \subsection{Tabella di parsing}
 \begin{table}[H]
   \centering
@@ -137,7 +128,6 @@ Riporto la tabella SRL(1).
   \hline
   7 & R4/\sout{S4} & R4/\sout{S5} & & R4 & & \\
   \hline
-  
   \end{tabularx}
   \label{tab:03-parsing-table}
 \end{table}
@@ -165,7 +155,6 @@ Effettuiamo il parsing della parola $nbnan$:
 \end{table}
 \subsection{Risultato}
 La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
-
 \newpage
 \section{Esercizio 4}
 \subsection{Funzioni ed attributi}
@@ -180,7 +169,6 @@ La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
   va a creare un nuovo nodo con label l'operatore (+ o *) e il riferimento
   ai nodi figli
 \end{itemize}
-
 \subsection{SDD}
 \begin{center}
   \begin{minipage}[t]{0.29\linewidth}
@@ -201,6 +189,4 @@ La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
 \end{center}
 \section{Esercizio 5}
 \subsection{SSD}
-
 \end{document}
-

@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 
-% Pacchetti utili
 \usepackage[utf8]{inputenc}  
 \usepackage{amsmath}         
 \usepackage{amssymb}         
@@ -14,8 +13,6 @@
 
 % Impostazioni per i margini
 \geometry{a4paper, margin=0.8in}
-% Spaziatura tra righe
-%\linespread{0.9}
 
 % Grandezza righe tabelle
 \renewcommand{\arraystretch}{1.2} % Aumenta l'altezza delle righe
@@ -28,10 +25,8 @@
 \fancyfoot[C]{\thepage}   
 \setlength{\headheight}{14pt}
 
-
 \begin{document}
 \section{Esercizio 1}
-
 \subsection{Creazione dell'automa caratteristico}
 Creiamo l'automa caratteristico $\cal A$ per il parsing bottom-up SLR(1). Iniziamo aggiungendo 
 una nuova produzione con un nuovo non terminale che produce lo start symbol: 
@@ -253,8 +248,6 @@ $b$ venga processato.
 all'operatore $a$ rispetto a $b$, il parser dovrebbe scegliere l'azione di \textit{shift}. 
 In questo modo, l'operatore $a$ verrà letto e processato prima che venga effettuata la riduzione con $b$.
 \end{itemize}
-
-
 \subsection{Automa caratteristico}
 \begin{figure}[H]
   \centering
