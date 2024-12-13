@@ -188,5 +188,32 @@ La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
   \hspace{0.2cm}
 \end{center}
 \section{Esercizio 5}
-\subsection{SSD}
+Riporto per comodità la SDT:
+\begin{center}
+  \begin{tabularx}{\linewidth}{m{0.25\linewidth} m{0.7\linewidth}}
+  $S \rightarrow id = E$    & $\{gen(table.get(id) = E.addr);\}$ \\ [0.2cm]
+  $S \rightarrow L = E$     & $\{gen(L.array.base[L.addr] = E.addr);\}$ \\ [0.2cm]
+  $E \rightarrow E_1 * E_2$ & $\{E.addr = newTemp(); \quad gen(E.addr = E_1.addr \cdot E_2.addr);\}$ \\ [0.2cm]
+  $E \rightarrow E_1 + E_2$ & $\{E.addr = newTemp(); \quad gen(E.addr = E_1.addr + E_2.addr);\}$ \\ [0.2cm]
+  $E \rightarrow L$         & $\{E.addr = newTemp(); \quad gen(E.addr = L.array.base[L.addr]);\}$ \\ [0.2cm]
+  $E \rightarrow id$        & $\{E.addr = newTemp(); \quad gen(E.addr = table.get(id));\}$ \\ [0.4cm]
+  $L \rightarrow id[E]$     & $\{L.array = table.get(id); \;\; L.type = arg2(table.getType(id)); \newline L.width = width(L.type);\;\; \newline L.addr = newTemp(); \quad \quad gen(L.addr = E.addr * L.width);\}$ \\ [1cm]
+  $L \rightarrow L_1[E]$    & $\{L.array = L_1.array;\quad\quad L.type = arg2(L_1.type); \newline L.width = width(L.type);\newline t = newTemp(); \quad \quad \quad \quad gen(t = E.addr \cdot L.width);\newline L.addr = newTemp(); \quad \; \;\, gen(L.addr = t + L_1.addr);\}$ \\ [0.6cm]
+  \end{tabularx}
+\end{center}
+A questo punto dobbiamo trovare l'albero di derivazione ed applicare le regole semantiche:
+\begin{center}
+  \begin{minipage}[t]{0.4\linewidth}
+    \raggedright
+    \begin{figure}[H]
+      \centering
+      \includegraphics[height=6cm, width=5cm]{./img/05DerivationTree.png}
+      \label{fig:05-derivation-tree} 
+    \end{figure}  
+  \end{minipage}
+  \begin{minipage}[t]{0.4\linewidth}
+    Ciao finirò la prossima settimana
+   
+  \end{minipage}
+\end{center}
 \end{document}
