@@ -242,7 +242,7 @@ $$b =  c + a[i][j]$$
   \begin{minipage}[t]{\linewidth}
     \begin{multicols}{2}
       \begin{figure}[H]
-        \includegraphics[height=10cm, width=7cm]{./img/06DerivationTree.png}
+        \includegraphics[width=\linewidth]{./img/06DerivationTree.png}
       \end{figure}
       La quinta riduzione è: $$E \rightarrow L$$
       \\Le sue regole semantiche sono: 
@@ -254,7 +254,6 @@ $$b =  c + a[i][j]$$
       la quarta riduzione ne genererà altri due $t_1$ e $t_2$.
       \\Fatte queste assunzioni possiamo dire che il codice generato
       per questa riduzione sarà: $$t_3 = a[t_2]$$
-      $$$$
     \end{multicols}
   \end{minipage}
 \end{center}
@@ -269,6 +268,30 @@ Le regole semantiche per $$L \rightarrow L_1[E]$$ sono:
   \item $L.addr = newTemp()$
   \item $gen(L.addr = L_1.addr + t)$
 \end{itemize}
+\newpage
 \section*{Esercizio 8}
-
+Costruiamo l'albero di derivazione e diamo un ordine per la valutazione delle regole semantiche.
+Come nelle slide i nodi {\color{blue} \textbf{blu}} sono sintetizzati, mentre quelli {\color {red} \textbf{rossi}} 
+sono ereditatii. 
+\begin{center}
+  \begin{minipage}[t]{\linewidth}
+    \begin{multicols}{2}
+      \begin{figure}[H]
+        \includegraphics[width=\linewidth]{./img/08DerivationTree.png}
+      \end{figure}
+      \begin{enumerate}
+        \item $B.t = integer \quad \big \{B \rightarrow int\big\}$ 
+        \item $C.b = B.t \quad \big \{T \rightarrow BC\big\}$
+        \item $C_1.b = C.b \quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C_1.b = C.b \quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C_1.b = C.b \quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C.t = C.b \quad \big \{C \rightarrow \epsilon\big\}$
+        \item $C.t = array(num.lexval, C_1.t) \newline \big \{C \rightarrow [num]C_1\big\}$
+        \item $C.t = array(num.lexval, C_1.t) \newline \big \{C \rightarrow [num]C_1\big\}$
+        \item $C.t = array(num.lexval, C_1.t) \newline \big \{C \rightarrow [num]C_1\big\}$
+        \item $T.t = C.t \quad \big \{T \rightarrow BC \big\}$
+      \end{enumerate}
+    \end{multicols}
+  \end{minipage}
+\end{center}
 \end{document}
