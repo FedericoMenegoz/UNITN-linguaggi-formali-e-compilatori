@@ -270,7 +270,7 @@ Le regole semantiche per $$L \rightarrow L_1[E]$$ sono:
 \end{itemize}
 \newpage
 \section*{Esercizio 8}
-Costruiamo l'albero di derivazione e diamo un ordine per la valutazione delle regole semantiche.
+Costruiamo l'albero di derivazione per $int[2][3][4]$ e diamo un ordine per la valutazione delle regole semantiche.
 Come nelle slide i nodi {\color{blue} \textbf{blu}} sono sintetizzati, mentre quelli {\color {red} \textbf{rossi}} 
 sono ereditatii. 
 \begin{center}
@@ -281,15 +281,15 @@ sono ereditatii.
       \end{figure}
       \begin{enumerate}
         \item $B.t = integer \quad \big \{B \rightarrow int\big\}$ 
-        \item $C.b = B.t \quad \big \{T \rightarrow BC\big\}$
-        \item $C_1.b = C.b \quad \big \{C \rightarrow [num]C_1\big\}$
-        \item $C_1.b = C.b \quad \big \{C \rightarrow [num]C_1\big\}$
-        \item $C_1.b = C.b \quad \big \{C \rightarrow [num]C_1\big\}$
-        \item $C.t = C.b \quad \big \{C \rightarrow \epsilon\big\}$
-        \item $C.t = array(num.lexval, C_1.t) \newline \big \{C \rightarrow [num]C_1\big\}$
-        \item $C.t = array(num.lexval, C_1.t) \newline \big \{C \rightarrow [num]C_1\big\}$
-        \item $C.t = array(num.lexval, C_1.t) \newline \big \{C \rightarrow [num]C_1\big\}$
-        \item $T.t = C.t \quad \big \{T \rightarrow BC \big\}$
+        \item $C.b = integer \quad \big \{T \rightarrow BC\big\}$
+        \item $C_1.b = integer \quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C_1.b = integer \quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C_1.b = integer \quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C.t = integer \quad \big \{C \rightarrow \epsilon\big\}$
+        \item $C.t = array(4,\; integer)\quad \big \{C \rightarrow [num]C_1\big\}$
+        \item $C.t = array(3,\;array(4,\;integer)) \newline \big \{C \rightarrow [num]C_1\big\}$
+        \item $C.t = array(2,\;array(3,\;array(4,\;integer))) \newline \big \{C \rightarrow [num]C_1\big\}$
+        \item $T.t = array(2,\;array(3,\;array(4,\;integer))) \newline \big \{T \rightarrow BC \big\}$
       \end{enumerate}
     \end{multicols}
   \end{minipage}
