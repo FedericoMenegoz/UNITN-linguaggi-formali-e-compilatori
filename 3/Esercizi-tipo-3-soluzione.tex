@@ -28,8 +28,7 @@
 
 
 \begin{document}
-\section{Esercizio 1}
-\subsection*{Soluzione}
+\section*{Esercizio 1}
 Gli items di $J[Aa]$ sono: 
 $$S \rightarrow Aa\cdot B$$
 $$B \rightarrow \cdot$$
@@ -42,8 +41,7 @@ Riporto l'automa.
   \includegraphics[width=0.6\textwidth]{../2/img/01AutomaSRL.png}
   \label{fig:01-automa}
 \end{figure}
-\section{Esercizio 2}
-\subsection{Soluzione}
+\section*{Esercizio 2}
 Seguendo le transazioni dallo stato iniziale dell'automa \hyperlink{automa_1}{$\cal A$} 
 si arriva allo stato 6 dell'automa, che non presenta alcun conflitto.
 Rimando sempre al primo esercizio delgli "Esercizi Tipo - Parte II" per lo svolgimento.
@@ -80,10 +78,10 @@ Riporto la tabella SRL(1).
   \label{tab:02-parsing}
 \end{table}
 \newpage
-\section{Esercizio 3}
+\section*{Esercizio 3}
 \begin{center}
   \begin{minipage}[t]{0.7\linewidth} 
-    \subsection{Automa caratteristico}
+    \subsection*{Automa caratteristico}
     \begin{figure}[H]
       \centering
         \includegraphics[width=0.8\textwidth]{./img/03AutomaSRL.png}
@@ -92,7 +90,7 @@ Riporto la tabella SRL(1).
   \end{minipage}
   \hspace{0.2cm} 
   \begin{minipage}[t]{0.25\linewidth} 
-    \subsection{First \& Follow}
+    \subsection*{First \& Follow}
     \begin{table}[H]
       \begin{tabular}{|c|c|c|}
       \hline
@@ -107,7 +105,7 @@ Riporto la tabella SRL(1).
     \end{table}
   \end{minipage}
 \end{center}
-\subsection{Tabella di parsing}
+\subsection*{Tabella di parsing}
 \begin{table}[H]
   \centering
   \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
@@ -133,7 +131,7 @@ Riporto la tabella SRL(1).
   \end{tabularx}
   \label{tab:03-parsing-table}
 \end{table}
-\subsection{Parsing}
+\subsection*{Parsing}
 Effettuiamo il parsing della parola $nbnan$:
 \begin{table}[H]
   \begin{tabular}{lllll}
@@ -155,11 +153,11 @@ Effettuiamo il parsing della parola $nbnan$:
   \end{tabular}
 \label{tab:03-parsing-a}
 \end{table}
-\subsection{Risultato}
+\subsection*{Risultato}
 La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
 \newpage
-\section{Esercizio 4}
-\subsection{Funzioni ed attributi}
+\section*{Esercizio 4}
+\subsection*{Funzioni ed attributi}
 \begin{itemize}
   \item \textit{node}: attributo sintetizzato che contiene informazioni sul tipo 
   (`+`, `*` o `id`), eventuali riferimenti alla tabella dei simboli e i 
@@ -171,7 +169,7 @@ La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
   va a creare un nuovo nodo con label l'operatore (+ o *) e il riferimento
   ai nodi figli
 \end{itemize}
-\subsection{SDD}
+\subsection*{SDD}
 \begin{center}
   \begin{minipage}[t]{0.29\linewidth}
     $E \rightarrow E_1 + E_2$ \\
@@ -189,7 +187,7 @@ La valutazione della parola $4b3a3$ secondo la SDD $\mathcal S$ è 21.
   \end{minipage}
   \hspace{0.2cm}
 \end{center}
-\section{Esercizio 5}
+\section*{Esercizio 5}
 Riporto per comodità la SDT:
 \begin{center}
   \begin{tabularx}{\linewidth}{m{0.25\linewidth} m{0.7\linewidth}}
@@ -236,7 +234,7 @@ A questo punto dobbiamo trovare l'albero di derivazione ed applicare le regole s
   \end{minipage}
 \end{center}
 
-\section{Esercizio 6}
+\section*{Esercizio 6}
 Per risolvere l'esercizio possiamo utilizzare la stessa SDT dell'esercizio precedente.
 Per prima cosa costruiamo l'albero di derivazione per la stringa:
 $$b =  c + a[i][j]$$
@@ -246,9 +244,7 @@ $$b =  c + a[i][j]$$
       \begin{figure}[H]
         \includegraphics[height=10cm, width=7cm]{./img/06DerivationTree.png}
       \end{figure}
-      Notiamo che non vi sono conflitti/ambiguità nel parsing di questa stringa, 
-      quindi possiamo ottenere solo questo albero.
-      \\La quinta riduzione è: $$E \rightarrow L$$
+      La quinta riduzione è: $$E \rightarrow L$$
       \\Le sue regole semantiche sono: 
       \begin{itemize}
         \item $E.addr = newTemp();$
@@ -262,4 +258,17 @@ $$b =  c + a[i][j]$$
     \end{multicols}
   \end{minipage}
 \end{center}
+\section*{Esercizio 7}
+Le regole semantiche per $$L \rightarrow L_1[E]$$ sono:
+\begin{itemize}
+  \item $L.array = L_1.array$
+  \item $L.type = arg2(L_1.type)$
+  \item $L.width = width(L.type)$
+  \item $t = newTemp()$
+  \item $gen(t = L.width * E.addr)$
+  \item $L.addr = newTemp()$
+  \item $gen(L.addr = L_1.addr + t)$
+\end{itemize}
+\section*{Esercizio 8}
+
 \end{document}
