@@ -209,6 +209,7 @@ A questo punto dobbiamo trovare l'albero di derivazione ed applicare le regole s
         \includegraphics[height=6.2cm, width=5cm]{./img/05DerivationTree.png}
       \end{figure}
       \begin{enumerate}
+        \small 
         \item $E.addr = i$
         \item $L.array = a$ 
         \newline $L.type = array(3, integer)$
@@ -280,6 +281,7 @@ sono ereditatii.
         \includegraphics[width=\linewidth]{./img/08DerivationTree.png}
       \end{figure}
       \begin{enumerate}
+        \small 
         \item $B.t = integer \quad \big \{B \rightarrow int\big\}$ 
         \item $C.b = integer \quad \big \{T \rightarrow BC\big\}$
         \item $C_1.b = integer \quad \big \{C \rightarrow [num]C_1\big\}$
@@ -288,8 +290,9 @@ sono ereditatii.
         \item $C.t = integer \quad \big \{C \rightarrow \epsilon\big\}$
         \item $C.t = array(4,\; integer)\quad \big \{C \rightarrow [num]C_1\big\}$
         \item $C.t = array(3,\;array(4,\;integer)) \newline \big \{C \rightarrow [num]C_1\big\}$
-        \item $C.t = array(2,\;array(3,\;array(4,\;integer))) \newline \big \{C \rightarrow [num]C_1\big\}$
-        \item $T.t = array(2,\;array(3,\;array(4,\;integer))) \newline \big \{T \rightarrow BC \big\}$
+        \item $C.t = array(2,\;array(3,\;array(4,\;integer)))
+        \newline \big \{C \rightarrow [num]C_1\big\}$
+        \item  $T.t = array(2,\;array(3,\;array(4,\;integer))) \newline \big \{T \rightarrow BC \big\}$
       \end{enumerate}
     \end{multicols}
   \end{minipage}
