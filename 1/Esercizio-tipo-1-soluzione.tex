@@ -2,6 +2,7 @@
 
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}  
+\usepackage[normalem]{ulem}
 \usepackage{amsmath}         
 \usepackage{amssymb}         
 \usepackage{graphicx}        
@@ -34,7 +35,7 @@
 A lezione non è stata fatta la dimostrazione, ma si può dimostrare
 che se due linguaggi sono regolari allora la loro unione è regolare, quindi la risposta è \textbf{VERO}.
 %%% Nota inizia qui %%%
-\begin{tcolorbox}[colframe=orange!70!black, colback=orange!10!white, title=\textbf{\textit{Nota inutile ai fini dell'esercizio:}}]
+\begin{tcolorbox}[colframe=orange!70!black, colback=orange!10!white, title=\textbf{\textit{Nota \sout{inutile ai fini dell'esercizio}:}}]
 Se prendessimo ad esempio:
 \begin{itemize}
   \item ${\cal L}_1 = \{w \in \{a,b\}^*|\;w\;ha\;una\;lunghezza\;pari\}$  
@@ -88,8 +89,7 @@ Sulle slide o dispensa studenti.
 Per la costruzione di un DFA partendo da un NFA partiamo dallo
 stato iniziale $A$ e calcoliamo la sua $\epsilon$-chiusura:
 $$closure(A) = \{A\;,B,\;C,\;E\} = T_0$$
-Da questo stato controlliamo in che stati andiamo a finire tramite
-una 
+Controllando le transazioni da $T_0$:
 \begin{itemize}
   \item a-transizione: $closure(D,\;E) = \{D,\;E\} = T_1$
   \item b-transizione: $closure(A,\;E) = \{A\;,B,\;C,\;E\} = T_0$
@@ -123,7 +123,72 @@ La funzione di transazione del DFA sarà:
 Quindi se $Q$ è lo stato iniziale del DFA allora: $Q[ab] = T_0 = {A, B, C, E}$
 \begin{figure}[H]
   \centering
-  \includegraphics[height=4.3cm]{img/03DFA.png}
+  \includegraphics[height=4cm]{img/03DFA.png}
   \label{fig:03-DFA}
 \end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%% ESERCIZIO 4 %%%%%%%%%%%%%%%%%%%%%%%
+\section*{Esercizio 4}
+\cal D ha una funzione di transizione parziale. Per renderla totale, aggiungiamo uno stato 'sink' che assorbe tutte le transizioni non definite:
+
+\begin{multicols}{2}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[height=4cm]{img/04DFAsink.png}
+    \label{fig:04-DFA-sink}
+  \end{figure}
+  
+  \begin{table}[H]
+    \centering
+    \begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \hline
+    & \textbf{a} & \textbf{b}  \\
+    \hline
+    $A$ & $B$ & $Sink$ \\
+    \hline
+    $B$ & $D$ & $C$ \\
+    \hline
+    $C$ & $D$ & $Sink$ \\
+    \hline
+    $D$ & $Sink$ & $B$ \\
+    \hline
+    $Sink$ & $Sink$ & $Sink$ \\
+    \hline
+    \end{tabularx}
+    \label{tab:04-funzione-transazione}
+    \caption*{\small Funzione di Transizione}
+  \end{table}
+\end{multicols}
+
+\noindent Per minimizzare l'automa, analizziamo gli stati di equivalenza usando il metodo di raffinamento successivo:
+
+\begin{table}[H]
+  \small
+  \centering
+  \begin{tabularx}{\linewidth}{l l l l l l}
+  0-equivalenti & $\{A,\;B,\;C,\;Sink\}$ & $\{D\}$ & & & \\
+  1-equivalenti & $\{A,\;Sink\}$ & $\{B,\;C\}$ & $\{D\}$ & & \\
+  2-equivalenti & $\{A\}$ & $\{Sink\}$ & $\{B\}$ & $\{C\}$ & $\{D\}$ \\
+  \end{tabularx}
+  \label{tab:04-partition-refinment}
+\end{table}
+
+\begin{tcolorbox}[colframe=orange!70!black, colback=orange!10!white, title=\textbf{\textit{Spiegazione}}]
+\begin{itemize}
+    \item \textbf{Stati 0-equivalenti}: si distinguono gli stati finali e non finali
+    \item \textbf{Stati 1-equivalenti}: 
+    \begin{itemize}
+      \item $\{A, Sink\}$ transitano entrambi verso lo stesso insieme $\{A,\;B,\;C,\;Sink\}$ sia con \textit{a-transazione} che con \textit{b-transazione}
+      \item $\{B, C\}$ transitano entrambi verso lo stesso insieme $\{D\}$ con \textit{a-transazione} e in $\{A,\;B,\;C,\;Sink\}$ con \textit{b-transazione}.
+    \end{itemize}
+    \item \textbf{Stati 2-equivalenti}:
+    \begin{itemize}
+      \item $A$ e $Sink$ vanno divisi perché la \textit{a-transazione} li porta a due insiemi diversi
+      \item in modo analogo anche $B$ e $C$ vanno separati perché la \textit{b-transazione} li porta a due insiemi diversi
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+\noindent 
+Il DFA è già minimo poiché nessun ulteriore raggruppamento è possibile. \\
+Quindi lo stato a cui corrisponde $P[abab]$ è $B$.
+
 \end{document}
