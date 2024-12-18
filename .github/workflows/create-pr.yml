@@ -12,8 +12,15 @@ jobs:
     - name: Checkout source repo
       uses: actions/checkout@v2
 
-    - name: Clone target repo
-      run: git clone https://github.com/FedericoMenegoz/dummy target
+    - name: Setup SSH A
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Clone Repo via SSH
+      run: git clone git@github.com:FedericoMenegoz/dummy.git target
 
     - name: Copy files
       run: |
