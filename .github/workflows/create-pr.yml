@@ -12,7 +12,7 @@ jobs:
     - name: Checkout source repo
       uses: actions/checkout@v2
 
-    - name: Setup SSH
+    - name: Setup SSH A
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
