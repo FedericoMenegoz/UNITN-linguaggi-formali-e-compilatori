@@ -192,16 +192,15 @@ Il DFA è già minimo poiché nessun ulteriore raggruppamento è possibile. \\
 Quindi lo stato a cui corrisponde $P[abab]$ è $B$.
 %%%%%%%%%%%%%%%%%%%%%%% ESERCIZIO 5 %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Esercizio 5}
-Iniziamo calcolando i $first$ e i $follow$.\\
+Iniziamo calcolando i $first$ e i $follow$.
 \begin{multicols}{2}
 \noindent\textbf{First:}
 \begin{itemize}
-  \small
   \item B può derivare $\epsilon$. Pertanto, $First(B) = \{\epsilon\}$
   \item A può derivare $BcBaA$ quindi aggiungiamo i $First(B)$ ai $First(A)$, $First(B)$ contiene $\epsilon$
   quindi consideriamo $First(cBaA)$ e aggiungiamo $c$ ai $First(A)$,
   A può anche derivare $\epsilon$ quindi aggiungiamo anche $\epsilon$
-  \item S può derivare $AaB$ quindi aggiungiamo i $First(A)$ ai $first(S)$, 
+  \item S può derivare $AaB$ quindi aggiungiamo i $First(A)$ ai $first(S)$,
   essendoci $\epsilon$ nei $first(A)$ allora dobbiamo aggiungere $first(aB)$ ai $first(S)$, infine S può derivare $b$ che sarà da aggiungere ai suoi $first$ 
 \end{itemize}
 \begin{table}[H]  
@@ -221,11 +220,11 @@ Iniziamo calcolando i $first$ e i $follow$.\\
 \end{table}
 \textbf{Follow:} 
 \begin{itemize}
-  \small
   \item $Follow(S)$: S è lo start symbol, quindi $Follow(S) = \{\$\}$, S non compare in nessun body quindi ci possiamo fermare
   \item $Follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $First(aB) = \{a\}$ è in $Follow(A)$
   \item $Follow(B)$:
   \begin{itemize}
+    \small
     \item nella produzione $S \to AaB$, B è l'ultimo simbolo della produzione dobbiamo aggiungere i $Follow(S)$ ai $Follow(B)$
     \item nella produzione $A \to BcBaA$, B è seguito da 'cBaA', quindi $First(cBaA) = \{c\}$ è in $Follow(B)$
   \end{itemize} 
