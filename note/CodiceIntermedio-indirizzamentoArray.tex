@@ -13,6 +13,7 @@
 \usepackage{tabularx}
 \usepackage{cancel}
 \usepackage{caption}
+\usepackage{tcolorbox}
 
 % Impostazioni per i margini
 \geometry{a4paper, margin=0.8in}
@@ -84,8 +85,11 @@ Da questa grammatica possiamo generare ad esempio:
 \subsection{Regole semantiche}
 La produzione $\mathbf{S \rightarrow id = E}$ deve generare il codice di assegnamento a 
 una variabile con il valore di un'espressione: 
+\begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
 $$\{gen(table.get(id) \;'\mathord{=}'\; E.addr);\}$$
-Le azioni semantiche per $\mathbf{S \rightarrow L=E}$ devono generare il codice che assegna
+\end{tcolorbox}
+\noindent 
+\\ Le azioni semantiche per $\mathbf{S \rightarrow L=E}$ devono generare il codice che assegna
 il valore dell'espressione \textbf{E} alla locazione di memoria referenziata da \textbf{L}. 
 \\Ricordando che: 
 \begin{itemize}
@@ -95,40 +99,50 @@ il valore dell'espressione \textbf{E} alla locazione di memoria referenziata da 
 \end{itemize}
 possiamo concludere che l'elemento sarà in $L.array.base[L.addr]$ e l'istruzione generata 
 copierà r-value da $E.addr$ alla locazione di L:
+\begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
 $$\{gen(L.array.base\;'\,[\,'\;L.addr\;'\,]\,'\;'\mathord{=}'\; E.addr);\}$$
-Le produzioni $\mathbf{E\rightarrow E_1+E_2}$ e per $\mathbf{E\rightarrow id}$ sono analoghe 
+\end{tcolorbox}
+
+\noindent 
+\\ Le produzioni $\mathbf{E\rightarrow E_1+E_2}$ e per $\mathbf{E\rightarrow id}$ sono analoghe 
 alla prima:
-$$\{gen(E.addr \;'\mathord{=}'\; E_1.addr \;'\mathord{+}'\; E_2.addr );\}$$
-$$\{gen(E.addr \;'\mathord{=}'\; table.get(id) );\}$$
-La produzione $\mathbf{E\rightarrow L}$ deve generare il codice per copiare l'elemento dell'array 
+\begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
+  $$\{gen(E.addr \;'\mathord{=}'\; E_1.addr \;'\mathord{+}'\; E_2.addr );\}$$
+  $$\{gen(E.addr \;'\mathord{=}'\; table.get(id) );\}$$
+\end{tcolorbox}
+\noindent 
+\\ La produzione $\mathbf{E\rightarrow L}$ deve generare il codice per copiare l'elemento dell'array 
 denotato da \textbf{L} in un nuovo temporaneo:
-$$\{E.addr = newTemp();\quad gen(E.addr '\mathord{=}' L.array.base\;'['\;L.addr\;']');\}$$
-La produzione $\mathbf{L \rightarrow id[E]}$ deve trasferire le informazioni sull'array denotato 
+\begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
+  $$\{E.addr = newTemp();\quad gen(E.addr '\mathord{=}' L.array.base\;'['\;L.addr\;']');\}$$
+\end{tcolorbox}
+\noindent 
+\\ La produzione $\mathbf{L \rightarrow id[E]}$ deve trasferire le informazioni sull'array denotato 
 da \textbf{id} in \textbf{L}.
-
-
-
-\begin{center}
-\begin{tabularx}{\linewidth}{l m{0.6\linewidth}}
-$\{L.array = table.get(id);$ 
-    & \small Recupera la voce della tabella dei simboli dell'array utilizzando l'identificatore id (ad es., "a") \\[0.3cm]
-
-$L.type = arg2(table.getType(id));$ 
-    & \small Estrae il tipo del sottoarray. Ad esempio, se $a$ è $array(2, array(3, integer))$, $L.type$ diventa $array(3, integer)$ \\[0.3cm]
-
-$L.width = width(L.type)$ 
-    & \small Determina la dimensione (in byte) del sottoarray rappresentato da $L.type$ \\[0.3cm]
-
-$L.addr = \text{newTemp()}$ 
-    & \small Crea un nuovo temporaneo \\ [0.3cm]
-
-$\text{gen}(L.addr \;'\mathord{=}'\;E.addr \;'*'\; L.width\; )\}$ 
-    & \small Calcola il primo offset, cioè in $a[i_1][i_2][...] \rightarrow i_1 \cdot w_1$ \\
-\end{tabularx}
-\end{center}
-
+\begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
+  \begin{center}
+    \begin{tabularx}{\linewidth}{l m{0.56\linewidth}}
+      $\{L.array = table.get(id);$ 
+      & \footnotesize Recupera la voce della tabella dei simboli dell'array utilizzando l'identificatore id (ad es., "a") \\[0.3cm]
+      
+      $L.type = arg2(table.getType(id));$ 
+      & \footnotesize Estrae il tipo del sottoarray. Ad esempio, se $a$ è $array(2, array(3, integer))$, $L.type$ diventa $array(3, integer)$ \\[0.3cm]
+      
+      $L.width = width(L.type)$ 
+      & \footnotesize Determina la dimensione (in byte) del sottoarray rappresentato da $L.type$ \\[0.3cm]
+      
+      $L.addr = \text{newTemp()}$ 
+      & \footnotesize Crea un nuovo temporaneo \\ [0.3cm]
+      
+      $\text{gen}(L.addr \;'\mathord{=}'\;E.addr \;'*'\; L.width\; )\}$ 
+      & \footnotesize Calcola il primo offset, cioè in $a[i_1][i_2][...] \rightarrow i_1 \cdot w_1$ \\
+    \end{tabularx}
+  \end{center}
+\end{tcolorbox}
+\newpage
 \noindent Infine la produzione $\mathbf{L \rightarrow L_1[E] }$ dovrà trasferire i dati processati da id,
 ed aggiornare l'offset per il corretto indirizzamento dell'elemento:
+\begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
 
 \begin{center}
   \begin{tabularx}{\linewidth}{l m{0.6\linewidth}}
@@ -154,4 +168,6 @@ ed aggiornare l'offset per il corretto indirizzamento dell'elemento:
       & \small Combina l'offset del livello precedente ($L_1.addr$) con l'offset appena calcolato (t) per ottenere l'offset totale per questo elemento. Questo offset totale viene quindi memorizzato in L.addr. \\
   \end{tabularx}  
 \end{center}
+\end{tcolorbox}
+
 \end{document}
