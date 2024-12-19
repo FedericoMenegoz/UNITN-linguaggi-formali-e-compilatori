@@ -1,6 +1,9 @@
 # Mac OS
 .DS_Store
 
+# Custom
+copia.sh
+
 # LaTeX
 *.aux
 *.log
