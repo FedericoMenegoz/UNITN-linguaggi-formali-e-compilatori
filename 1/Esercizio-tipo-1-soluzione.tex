@@ -3,20 +3,19 @@
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}  
 \usepackage[normalem]{ulem}
+\usepackage[table,xcdraw]{xcolor}
 \usepackage{amsmath}         
 \usepackage{amssymb}         
 \usepackage{graphicx}        
 \usepackage{geometry}        
 \usepackage{fancyhdr}            
 \usepackage{float} 
-\usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{multicol}
 \usepackage{caption}
 \usepackage{tcolorbox} 
-\usepackage[table,xcdraw]{xcolor}
 % Impostazioni per i margini
-\geometry{a4paper, margin=0.8in}
+\geometry{a4paper, margin=0.76in}
 
 % Grandezza righe tabelle
 \renewcommand{\arraystretch}{1.2} % Aumenta l'altezza delle righe
@@ -182,13 +181,13 @@ Quindi se $Q$ è lo stato iniziale del DFA allora: $Q[ab] = T_0 = {A, B, C, E}$
     \end{itemize}
     \item \textbf{Stati 2-equivalenti}:
     \begin{itemize}
-      \item $A$ e $Sink$ vanno divisi perché la \textit{a-transazione} li porta a due insiemi diversi
+      \item $A$ e $Sink$ vanno divisi perché la \textit{a-transazione} li porta a due insiemi diversi (A va a $\{B, C\}$ mentre Sink va a $\{A, Sink\}$)
       \item in modo analogo anche $B$ e $C$ vanno separati perché la \textit{b-transazione} li porta a due insiemi diversi
     \end{itemize}
 \end{itemize}
 \end{tcolorbox}
 \noindent 
-Il DFA è già minimo poiché nessun ulteriore raggruppamento è possibile. \\
+Il DFA è già minimo poiché nessun raggruppamento è possibile. \\
 Quindi lo stato a cui corrisponde $P[abab]$ è $B$.
 %%%%%%%%%%%%%%%%%%%%%%% ESERCIZIO 5 %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Esercizio 5}
@@ -224,9 +223,8 @@ Iniziamo calcolando i $first$ e i $follow$.
   \item $Follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $First(aB) = \{a\}$ è in $Follow(A)$
   \item $Follow(B)$:
   \begin{itemize}
-    \small
     \item nella produzione $S \to AaB$, B è l'ultimo simbolo della produzione dobbiamo aggiungere i $Follow(S)$ ai $Follow(B)$
-    \item nella produzione $A \to BcBaA$, B è seguito da 'cBaA', quindi $First(cBaA) = \{c\}$ è in $Follow(B)$
+    \item nella produzione $A \to BcBaA$, B è seguito da 'cBaA', $First(cBaA) = \{c\}$ è in $Follow(B)$
   \end{itemize} 
 \end{itemize}
 \end{multicols}
@@ -257,5 +255,44 @@ La tabella di parsing $LL(1)$ è la seguente e la risposta è evidenziata:
     \end{tabularx}
   \label{tab:05-tabella-parsing}
 \end{table}
+\section*{Esercizio 6}
+$${\cal L} = \{ww | w \in {\cal L}((a|b)^*)\}$$
+Questo linguaggio rappresenta l'insieme delle stringhe formate da due
+copie consecutive di una parola del linguaggio denotato da $(a|b)^*$.
+\\Per dimostrare che non è regolare utilizzando il pumping lemma:
+\begin{enumerate}
+  \item supponiamo che $\cal L$ sia regolare
+  \item prendiamo una \textit{pumping constant} p arbitraria
+  \item scegliamo una parola opportuna $z=a^p\,b^p\,a^p\,b^p$
+  \item guardiamo a tutte le possibili decomposizioni di $z$ in $uvw$ con:
+  \begin{enumerate}
+    \item $|uv| \le p$
+    \item $|v| \ge 1$
+  \end{enumerate}
+  Quindi abbiamo che $u=a^\alpha$, $v=a^\beta$ e $w=a^{p -\alpha - \beta }\,b^p\,a^p\,b^p$
+  \item scelgo una $i$ opportuna tale che $uv^iw \not \in \cal L$
+  $$a^\alpha\,a^{i\cdot\beta}\,a^{p-\alpha -\beta}\,b^p\,a^p\,b^p = a^{p + \beta (i -1)}\,b^p\,a^p\,b^p$$
+  Sapendo che $\beta \ne 0$ perché $|v| \ge 1$ ci basta scegliere $i \ne 1$, quindi scegliamo 2 e otteniamo 
+  $$a^{p + \beta}\,b^p\,a^p\,b^p \not \in \cal L$$ 
+\end{enumerate}
+Andando così in contraddizione con l'enunciato del pumping lemma, quindi $\cal L$ non è regolare.
+\newpage
+\section*{Esercizio 7}
+Un metodo per risolvere questo esercizio sarebbe quello di fare la \textit{costruzione
+di Thompson} per ottenere un NFA, dopo di che fare il \textit{subset construction} per tradurlo in un DFA ed infine il \textit{partition refinment} per minimizzarlo.
+Solo che all'esame, non si ha tutto questo tempo, quindi possiamo analizzare la regex:
+\begin{itemize}
+  \item $b^*$ denota o la parola vuota oppure una serie arbitraria di b
+  \item $b^*\,a\,(\epsilon\,|\,a\,|\,b)^*$ denota una serie arbitraria di $b$ (anche zero) seguita da una a seguita da $(a | b)^*$
+\end{itemize}
+Si riescie a notare che possiamo formare qualsiasi parola su $\{a, b\}$, quindi l'automa caratteristico può essere il seguente:
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=2.5cm]{img/07DFA.png}
+  \label{fig:07-DFA}
+\end{figure}
+\noindent Che è già minimo. Quindi la risposta è che $\cal D$ ha uno stato che è anche finale.
 
+\section*{Esercizi 8, 9 e 10}
+Guardare \textbf{5.4 Proprietà di chiusura nei linguaggi regolari} della dispensa studenti.
 \end{document}
