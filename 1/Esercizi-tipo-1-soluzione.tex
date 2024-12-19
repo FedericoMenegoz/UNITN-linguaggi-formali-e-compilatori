@@ -31,8 +31,10 @@
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%% ESERCIZIO 1 %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Esercizio 1}
-A lezione non è stata fatta la dimostrazione, ma si può dimostrare
-che se due linguaggi sono regolari allora la loro unione è regolare, quindi la risposta è \textbf{VERO}.
+Se due linguaggi sono regolari allora la loro unione è regolare, 
+basta prendere i due DFA che riconoscono i linguaggi e creare un nuovo
+stato iniziale che si collega agli stati iniziali dei due DFA tramite
+una $\epsilon$-transizione quindi la risposta è \textbf{VERO}.
 %%% Nota inizia qui %%%
 \begin{tcolorbox}[colframe=orange!70!black, colback=orange!10!white, title=\textbf{\textit{Nota \sout{inutile ai fini dell'esercizio}:}}]
 Se prendessimo ad esempio:
@@ -85,7 +87,7 @@ Sulle slide o dispensa studenti.
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%% ESERCIZIO 3 %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Esercizio 3}
-Per la costruzione di un DFA partendo da un NFA partiamo dallo
+Per la costruzione di un DFA da un NFA partiamo dallo
 stato iniziale $A$ e calcoliamo la sua $\epsilon$-chiusura:
 $$closure(A) = \{A\;,B,\;C,\;E\} = T_0$$
 Controllando le transazioni da $T_0$:
@@ -93,12 +95,12 @@ Controllando le transazioni da $T_0$:
   \item a-transizione: $closure(D,\;E) = \{D,\;E\} = T_1$
   \item b-transizione: $closure(A,\;E) = \{A\;,B,\;C,\;E\} = T_0$
 \end{itemize}
-Facciamo la stessa cosa da $T_1$:
+$T_1$:
 \begin{itemize}
   \item a-transizione: $closure(E) = \{E\} = T_2$
   \item b-transizione: $closure(A,\;B) = \{A\;,B,\;C,\;E\} = T_0$
 \end{itemize}
-Facciamo la stessa cosa da $T_2$:
+$T_2$:
 \begin{itemize}
   \item a-transizione: $closure(E) = \{E\} = T_2$
   \item b-transizione: $closure(A) = \{A\;,B,\;C,\;E\} = T_0$
@@ -119,7 +121,7 @@ La funzione di transazione del DFA sarà:
   \end{tabularx}
   \label{tab:03-parsing-table}
 \end{table}
-Quindi se $Q$ è lo stato iniziale del DFA allora: $Q[ab] = T_0 = {A, B, C, E}$
+\noindent Quindi se $Q$ è lo stato iniziale del DFA allora: $Q[ab] = T_0 = {A, B, C, E}$
 \begin{figure}[H]
   \centering
   \includegraphics[height=4cm]{img/03DFA.png}
@@ -158,7 +160,7 @@ Quindi se $Q$ è lo stato iniziale del DFA allora: $Q[ab] = T_0 = {A, B, C, E}$
   \end{table}
 \end{multicols}
 
-\noindent Per minimizzare l'automa, analizziamo gli stati di equivalenza usando il metodo di raffinamento successivo:
+\noindent Per minimizzare l'automa, analizziamo gli stati di equivalenza usando il \textit{partition refinment}:
 
 \begin{table}[H]
   \small
@@ -195,11 +197,11 @@ Iniziamo calcolando i $first$ e i $follow$.
 \begin{multicols}{2}
 \noindent\textbf{First:}
 \begin{itemize}
-  \item B può derivare $\epsilon$. Pertanto, $First(B) = \{\epsilon\}$
-  \item A può derivare $BcBaA$ quindi aggiungiamo i $First(B)$ ai $First(A)$, $First(B)$ contiene $\epsilon$
-  quindi consideriamo $First(cBaA)$ e aggiungiamo $c$ ai $First(A)$,
-  A può anche derivare $\epsilon$ quindi aggiungiamo anche $\epsilon$
-  \item S può derivare $AaB$ quindi aggiungiamo i $First(A)$ ai $first(S)$,
+  \item B può derivare $\epsilon$. Pertanto, $first(B) = \{\epsilon\}$
+  \item A può derivare $BcBaA$ quindi aggiungiamo i $first(B)$ ai $first(A)$, $first(B)$ contiene $\epsilon$
+  quindi consideriamo $first(cBaA)$ e aggiungiamo $c$ ai $first(A)$,
+  A può anche derivare $\epsilon$ quindi aggiungiamola ai $first(A)$
+  \item S può derivare $AaB$ quindi aggiungiamo i $first(A)$ ai $first(S)$,
   essendoci $\epsilon$ nei $first(A)$ allora dobbiamo aggiungere $first(aB)$ ai $first(S)$, infine S può derivare $b$ che sarà da aggiungere ai suoi $first$ 
 \end{itemize}
 \begin{table}[H]  
@@ -219,12 +221,12 @@ Iniziamo calcolando i $first$ e i $follow$.
 \end{table}
 \textbf{Follow:} 
 \begin{itemize}
-  \item $Follow(S)$: S è lo start symbol, quindi $Follow(S) = \{\$\}$, S non compare in nessun body quindi ci possiamo fermare
-  \item $Follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $First(aB) = \{a\}$ è in $Follow(A)$
-  \item $Follow(B)$:
+  \item $follow(S)$: S è lo start symbol, quindi $follow(S) = \{\$\}$, S non compare in nessun body quindi ci possiamo fermare
+  \item $follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $first(aB) = \{a\}$ è in $follow(A)$
+  \item $follow(B)$:
   \begin{itemize}
-    \item nella produzione $S \to AaB$, B è l'ultimo simbolo della produzione dobbiamo aggiungere i $Follow(S)$ ai $Follow(B)$
-    \item nella produzione $A \to BcBaA$, B è seguito da 'cBaA', $First(cBaA) = \{c\}$ è in $Follow(B)$
+    \item nella produzione $S \to AaB$, B è l'ultimo simbolo della produzione dobbiamo aggiungere i $follow(S)$ ai $follow(B)$
+    \item nella produzione $A \to BcBaA$, B è seguito da 'cBaA', $first(cBaA) = \{c\}$ è in $follow(B)$
   \end{itemize} 
 \end{itemize}
 \end{multicols}
@@ -233,8 +235,8 @@ Le regole per popolare la tabella di parsing LL(1) sono:
 \begin{itemize}
   \item per ogni produzione $A \to \alpha$ nella grammatica:
   \begin{itemize}
-     \item per ogni terminale 'b' in $First(\alpha)$ (escludendo $\epsilon$) bisogna aggiungere $A \to \alpha$ alla voce della tabella $M[A, b]$.
-     \item se $\epsilon$ è in $First(\alpha)$ allora per ogni terminale 'x' in $Follow(A)$ bisogna aggiungere $A \to \alpha$ alla voce della tabella $M[A, x]$.
+     \item per ogni terminale 'b' in $first(\alpha)$ (escludendo $\epsilon$) bisogna aggiungere $A \to \alpha$ alla voce della tabella $M[A, b]$.
+     \item se $\epsilon$ è in $first(\alpha)$ allora per ogni terminale 'x' in $follow(A)$ bisogna aggiungere $A \to \alpha$ alla voce della tabella $M[A, x]$.
   \end{itemize}
   \item imposta tutte le voci vuote nella tabella a 'errore'
 \end{itemize}
