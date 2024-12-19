@@ -13,8 +13,8 @@
 \usepackage{tabularx}
 \usepackage{multicol}
 \usepackage{caption}
-\usepackage{tcolorbox} % Pacchetto per la nota evidenziata
-
+\usepackage{tcolorbox} 
+\usepackage[table,xcdraw]{xcolor}
 % Impostazioni per i margini
 \geometry{a4paper, margin=0.8in}
 
@@ -190,5 +190,73 @@ Quindi se $Q$ è lo stato iniziale del DFA allora: $Q[ab] = T_0 = {A, B, C, E}$
 \noindent 
 Il DFA è già minimo poiché nessun ulteriore raggruppamento è possibile. \\
 Quindi lo stato a cui corrisponde $P[abab]$ è $B$.
+%%%%%%%%%%%%%%%%%%%%%%% ESERCIZIO 5 %%%%%%%%%%%%%%%%%%%%%%%
+\section*{Esercizio 5}
+Iniziamo calcolando i $first$ e i $follow$.\\
+\begin{multicols}{2}
+\noindent\textbf{First:}
+\begin{itemize}
+  \small
+  \item B può derivare $\epsilon$. Pertanto, $First(B) = \{\epsilon\}$
+  \item A può derivare $BcBaA$ quindi aggiungiamo i $First(B)$ ai $First(A)$, $First(B)$ contiene $\epsilon$
+  quindi consideriamo $First(cBaA)$ e aggiungiamo $c$ ai $First(A)$,
+  A può anche derivare $\epsilon$ quindi aggiungiamo anche $\epsilon$
+  \item S può derivare $AaB$ quindi aggiungiamo i $First(A)$ ai $first(S)$, 
+  essendoci $\epsilon$ nei $first(A)$ allora dobbiamo aggiungere $first(aB)$ ai $first(S)$, infine S può derivare $b$ che sarà da aggiungere ai suoi $first$ 
+\end{itemize}
+\begin{table}[H]  
+  \centering
+  \begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \hline
+    & first & follow  \\
+    \hline
+    $S$ & b a c & \$ \\
+    \hline
+    $A$ & $\epsilon$ c & a \\
+    \hline
+    $B$ & $\epsilon$ & c a \$ \\
+    \hline
+  \end{tabularx}
+  \label{tab:05-first-follow}
+\end{table}
+\textbf{Follow:} 
+\begin{itemize}
+  \small
+  \item $Follow(S)$: S è lo start symbol, quindi $Follow(S) = \{\$\}$, S non compare in nessun body quindi ci possiamo fermare
+  \item $Follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $First(aB) = \{a\}$ è in $Follow(A)$
+  \item $Follow(B)$:
+  \begin{itemize}
+    \item nella produzione $S \to AaB$, B è l'ultimo simbolo della produzione dobbiamo aggiungere i $Follow(S)$ ai $Follow(B)$
+    \item nella produzione $A \to BcBaA$, B è seguito da 'cBaA', quindi $First(cBaA) = \{c\}$ è in $Follow(B)$
+  \end{itemize} 
+\end{itemize}
+\end{multicols}
+\newpage
+Le regole per popolare la tabella di parsing LL(1) sono:
+\begin{itemize}
+  \item per ogni produzione $A \to \alpha$ nella grammatica:
+  \begin{itemize}
+     \item per ogni terminale 'b' in $First(\alpha)$ (escludendo $\epsilon$) bisogna aggiungere $A \to \alpha$ alla voce della tabella $M[A, b]$.
+     \item se $\epsilon$ è in $First(\alpha)$ allora per ogni terminale 'x' in $Follow(A)$ bisogna aggiungere $A \to \alpha$ alla voce della tabella $M[A, x]$.
+  \end{itemize}
+  \item imposta tutte le voci vuote nella tabella a 'errore'
+\end{itemize}
+La tabella di parsing $LL(1)$ è la seguente e la risposta è evidenziata:
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\linewidth}{|X|X|X|X|X|}
+    \hline
+    & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{\$} \\
+    \hline
+    $S$ & $S\rightarrow AaB$ & $S\rightarrow b$ & $S\rightarrow AaB$ & \\
+    \hline
+    $A$ & $A\rightarrow \epsilon$ & & $A\rightarrow BcBaA$& \\
+    \hline
+    \rowcolor{yellow}
+    $B$ & $B\rightarrow \epsilon$ & & $B\rightarrow \epsilon$ & $B\rightarrow \epsilon$ \\
+    \hline
+    \end{tabularx}
+  \label{tab:05-tabella-parsing}
+\end{table}
 
 \end{document}
