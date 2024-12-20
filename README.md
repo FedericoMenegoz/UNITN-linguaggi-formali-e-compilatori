@@ -4,4 +4,4 @@ Svolgimento degli esercizi proposti nel corso di Linguaggi Formali e Compilatori
 - [tipo1](1/Esercizi-tipo-1-soluzione.pdf) grammatiche libere, linguaggi regolari, NFA, DFA, automa LL(1)
 - [tipo2](2/Esercizi-tipo-2-soluzione.pdf) automa SRL(1)
 - [tipo3](3/Esercizi-tipo-3-soluzione.pdf) automa SRL(1), parsing SRL(1), Syntax Directed Definition and Translation, codice intermedio
-- [note](note/CodiceIntermedio-IndirizzamentoArray.pdf) sulla parte di indirizzamento array
+- [note](note/CodiceIntermedio-indirizzamentoArray.pdf) sulla parte di indirizzamento array
