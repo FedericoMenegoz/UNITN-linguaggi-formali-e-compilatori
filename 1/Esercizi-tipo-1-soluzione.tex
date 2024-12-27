@@ -212,7 +212,7 @@ Iniziamo calcolando i $first$ e i $follow$.
     \hline
     $S$ & b a c & \$ \\
     \hline
-    $A$ & $\epsilon$ c & a \\
+    $A$ & $\epsilon$ c & a \$ \\
     \hline
     $B$ & $\epsilon$ & c a \$ \\
     \hline
@@ -222,7 +222,7 @@ Iniziamo calcolando i $first$ e i $follow$.
 \textbf{Follow:} 
 \begin{itemize}
   \item $follow(S)$: S è lo start symbol, quindi $follow(S) = \{\$\}$, S non compare in nessun body quindi ci possiamo fermare
-  \item $follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $first(aB) = \{a\}$ è in $follow(A)$
+  \item $follow(A)$: nella produzione $S \to AaB$, A è seguito da 'aB', quindi $first(aB) = \{a\}$ è in $follow(A)$, inoltre nella scegliendo $A$ nella formula $X \to \alpha A \beta$ avremo $\beta = aB$ e siccome $B \to \epsilon$ allora dobbiamo aggiungere i follow di $X$ ai follow di $A$, quindi $\epsilon$ appartiene a $follow(A)$
   \item $follow(B)$:
   \begin{itemize}
     \item nella produzione $S \to AaB$, B è l'ultimo simbolo della produzione dobbiamo aggiungere i $follow(S)$ ai $follow(B)$
