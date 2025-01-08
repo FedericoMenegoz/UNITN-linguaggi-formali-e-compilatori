@@ -201,7 +201,7 @@ Riporto per comodità la SDT:
   $E \rightarrow E_1 * E_2$ & $\{E.addr = newTemp(); \quad gen(E.addr = E_1.addr \cdot E_2.addr);\}$ \\ [0.2cm]
   $E \rightarrow E_1 + E_2$ & $\{E.addr = newTemp(); \quad gen(E.addr = E_1.addr + E_2.addr);\}$ \\ [0.2cm]
   $E \rightarrow L$         & $\{E.addr = newTemp()\;\; \quad gen(E.addr = L.array.base[L.addr]);\}$ \\ [0.2cm]
-  $E \rightarrow id$        & $\{gen(E.addr = table.get(id));\}$ \\ [0.4cm]
+  $E \rightarrow id$        & $\{E.addr = table.get(id);\}$ \\ [0.4cm]
   $L \rightarrow id[E]$     & $\{L.array = table.get(id); \;\; L.type = arg2(table.getType(id)); \newline L.width = width(L.type);\;\; \newline L.addr = newTemp(); \quad \quad gen(L.addr = E.addr * L.width);\}$ \\ [1cm]
   $L \rightarrow L_1[E]$    & $\{L.array = L_1.array;\quad\quad L.type = arg2(L_1.type); \newline L.width = width(L.type);\newline t = newTemp(); \quad \quad \quad \quad gen(t = E.addr \cdot L.width);\newline L.addr = newTemp(); \quad \; \;\, gen(L.addr = t + L_1.addr);\}$ \\ [0.6cm]
   \end{tabularx}

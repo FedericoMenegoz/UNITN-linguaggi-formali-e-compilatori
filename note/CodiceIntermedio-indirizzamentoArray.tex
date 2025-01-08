@@ -104,11 +104,10 @@ $$\{gen(L.array.base\;'\,[\,'\;L.addr\;'\,]\,'\;'\mathord{=}'\; E.addr);\}$$
 \end{tcolorbox}
 
 \noindent 
-\\ Le produzioni $\mathbf{E\rightarrow E_1+E_2}$ e per $\mathbf{E\rightarrow id}$ sono analoghe 
-alla prima:
+\\ Le produzioni $\mathbf{E\rightarrow E_1+E_2}$ e per $\mathbf{E\rightarrow id}$ sono le seguenti:
 \begin{tcolorbox}[colframe=black!10!black, colback=black!10!white]
   $$\{gen(E.addr \;'\mathord{=}'\; E_1.addr \;'\mathord{+}'\; E_2.addr );\}$$
-  $$\{gen(E.addr \;'\mathord{=}'\; table.get(id) );\}$$
+  $$\{E.addr = table.get(id);\}$$
 \end{tcolorbox}
 \noindent 
 \\ La produzione $\mathbf{E\rightarrow L}$ deve generare il codice per copiare l'elemento dell'array 
