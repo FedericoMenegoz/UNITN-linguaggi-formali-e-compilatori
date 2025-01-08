@@ -250,16 +250,19 @@ $$b =  c + a[i][j]$$
       \begin{figure}[H]
         \includegraphics[width=\linewidth]{./img/06DerivationTree.png}
       \end{figure}
-      La quinta riduzione è: $$E \rightarrow L$$
+      La quinta riduzione è: $$L \rightarrow L_1[E]$$
       \\Le sue regole semantiche sono: 
       \begin{itemize}
-        \item $E.addr = newTemp();$
-        \item $gen\big(E.addr = L.array.base[L.addr]\big);$
+        \item $L.array = L_1.array = a$
+        \item $L.type = arg2(L_1.type) = int$
+        \item $L.width = width(L.type) = 4$
+        \item $t = newTemp()$
+        \item $gen(t=E.addr\cdot L.width)$
+        \item $L.addr = newTemp()$
+        \item $gen(L.addr = t + L_1.addr)$ 
       \end{itemize}
-      La seconda riduzione genererà un nuovo temporaneo $t_0$, 
-      la quarta riduzione ne genererà altri due $t_1$ e $t_2$.
-      \\Fatte queste assunzioni possiamo dire che il codice generato
-      per questa riduzione sarà: $$t_3 = a[t_2]$$
+      Tenendo conto che la terza riduzione genererà un nuovo temporaneo $t_0$. 
+      Il codice generato dalla quinta riduzione sarà:$$t_1 = j \cdot 4$$ $$t_2 = t_0 + t_1$$
     \end{multicols}
   \end{minipage}
 \end{center}
